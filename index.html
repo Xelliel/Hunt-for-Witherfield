@@ -3,9 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>A Walk In Witherfield</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div id="game-container">
+        <h1>Welcome To Witherfield</h1>
+        <div id="lives">
+            <span class="heart">❤️</span>
+            <span class="heart">❤️</span>
+            <span class="heart">❤️</span>
+        </div>
+        <div id="riddle-container1">
+            <p id="riddle">"Are you lost, little soul?"</p>
+            <select id="riddle-answers">
+                <option value="">--Select an answer--</option>
+                <option value="Egg">"No, I'll find my own way"</option>
+                <option value="Window">"Yes!! Please let me out of here!!"</option>
+                <option value="Bread">"Who are you!? Where am I!?"</option>
+            </select>
+            <button id="submit-answer">Submit Answer</button>
+        </div>
+        <div id="riddle-container2">
+            <p id="riddle">What is lost but seldom found?</p>
+            <select id="riddle-answers">
+                <option value="">--Select an answer--</option>
+                <option value="Egg">"Mercy."</option>
+                <option value="Window">Window</option>
+                <option value="Bread">Bread</option>
+            </select>
+            <button id="submit-answer">Submit Answer</button>
+        </div>
+        <div id="riddle-container3">
+            <p id="riddle">What has to be broken before you can use it?</p>
+            <select id="riddle-answers">
+                <option value="">--Select an answer--</option>
+                <option value="Egg">Egg</option>
+                <option value="Window">Window</option>
+                <option value="Bread">Bread</option>
+            </select>
+            <button id="submit-answer">Submit Answer</button>
+        </div>
+    </div>
+    <script src="index.js"></script>
 </body>
 </html>

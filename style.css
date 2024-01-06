@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+#lives {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+h1 {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#game-container {
+    width: 100vw; /* Adjust the width as needed */
+    height: 100vh; /* Adjust the height as needed */
+    margin: 0 auto; /* Centers the container */
+    border: 2px solid #000; /* Adds a border for visibility */
+    background-color: #470909; /* Sets a background color */
+    padding: 20px; /* Adds some padding inside the container */
+    box-sizing: border-box; /* Ensures padding doesn't affect size */
+    position: relative; /* Needed for absolute positioning inside */
+    color: #ffffff;
+}
+
+
+
+#riddle-container {
+    /* Additional styling for the riddle section */
+}
+
+.heart {
+    /* Styles for the heart/lives */
+}
