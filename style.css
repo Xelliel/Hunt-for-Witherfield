@@ -3,18 +3,21 @@
     padding: 0;
 }
 
-
 #lives {
     font-size: 24px;
     margin-bottom: 10px;
 }
+
 h1 {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font: 300;
+    color: red;
+    font: stretch 200px; ;
 }
 
 #game-container {
-    width: 100vw; /* Adjust the width as needed */
-    height: 100vh; /* Adjust the height as needed */
+    width: 640px; /* Adjust the width as needed */
+    height: 480px; /* Adjust the height as needed */
     margin: 0 auto; /* Centers the container */
     border: 2px solid #000; /* Adds a border for visibility */
     background-color: #470909; /* Sets a background color */
@@ -22,8 +25,19 @@ h1 {
     box-sizing: border-box; /* Ensures padding doesn't affect size */
     position: relative; /* Needed for absolute positioning inside */
     color: #ffffff;
+    background-image: url('assets/dungeon_tiles.png'); /* Corrected the background image syntax */
+    background-size:cover;
 }
 
+#toggle-music {
+    /* Add your styling here */
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color:green;
+    /* ... */
+}
 
 
 #riddle-container {
@@ -32,4 +46,28 @@ h1 {
 
 .heart {
     /* Styles for the heart/lives */
+}
+#character {
+    width: 50px; /* Adjust the size as needed */
+    height: 50px;
+    position: absolute;
+    top: 100px; /* Initial position */
+    left: 100px;
+    background-image: url('assets/Idle__001.png');
+    animation: idleAnimation 1s steps([Number of Frames]) infinite;
+}
+
+.character-run {
+    background-image: url('assets/Run__001.png');
+    animation: runAnimation 0.5s steps([Number of Frames]) infinite;
+}
+
+@keyframes idleAnimation {
+    0% { background-position: 0 0; }
+    100% { background-position: -100% 0; }
+}
+
+@keyframes runAnimation {
+    0% { background-position: 0 0; }
+    100% { background-position: -100% 0; }
 }

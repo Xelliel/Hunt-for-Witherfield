@@ -7,8 +7,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <audio id="background-music" src="assets/opening music.mp3" loop></audio>
+    <audio id="game-over-music" src="path/to/your/game-over-music.mp3"></audio>
     <div id="game-container">
         <h1>Welcome To Witherfield</h1>
+        <button id="start-game">Start Game</button><button id="toggle-music">Toggle Music</button>
+
+        <img id="character" src="assets/Run__001.png" alt="Character" />
         <div id="lives">
             <span class="heart">❤️</span>
             <span class="heart">❤️</span>
@@ -18,9 +23,9 @@
             <p id="riddle">"Are you lost, little soul?"</p>
             <select id="riddle-answers">
                 <option value="">--Select an answer--</option>
-                <option value="Egg">"No, I'll find my own way"</option>
-                <option value="Window">"Yes!! Please let me out of here!!"</option>
-                <option value="Bread">"Who are you!? Where am I!?"</option>
+                <option value="No, I'll find my own way">"No, I'll find my own way"</option>
+                <option value="Yes!! Please let me out of here!!">"Yes!! Please let me out of here!!"</option>
+                <option value="Who are you!? Where am I!?">"Who are you!? Where am I!?"</option>
             </select>
             <button id="submit-answer">Submit Answer</button>
         </div>
@@ -28,21 +33,25 @@
             <p id="riddle">What is lost but seldom found?</p>
             <select id="riddle-answers">
                 <option value="">--Select an answer--</option>
-                <option value="Egg">"Mercy."</option>
-                <option value="Window">Window</option>
-                <option value="Bread">Bread</option>
+                <option value="Mercy.">"Mercy."</option>
+                <option value="I'll give you anything you want...">"I'll give you anything you want..."</option>
+                <option value="Sanity...?">"Sanity...?"</option>
             </select>
             <button id="submit-answer">Submit Answer</button>
         </div>
         <div id="riddle-container3">
-            <p id="riddle">What has to be broken before you can use it?</p>
+            <p id="riddle">Will you join me in bleak eternity?</p>
             <select id="riddle-answers">
                 <option value="">--Select an answer--</option>
-                <option value="Egg">Egg</option>
-                <option value="Window">Window</option>
-                <option value="Bread">Bread</option>
+                <option value="Egg">"There isn't a way out, is there?"</option>
+                <option value="Window">"How long do you plan to keep up this game?"</option>
+                <option value="Bread">"If that's the only way..."</option>
             </select>
             <button id="submit-answer">Submit Answer</button>
+        </div>
+        <div id="game-over-screen" style="display:none;">
+            <p>You have been consumed by Witherfield...</p>
+            <!-- Add more game-over information and maybe a restart button -->
         </div>
     </div>
     <script src="index.js"></script>
