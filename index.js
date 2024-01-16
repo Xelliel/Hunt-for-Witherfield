@@ -25,6 +25,12 @@ document.getElementById('toggle-music').addEventListener('click', function() {
     }
 });
 
+const riddleTriggers = [
+    { x: 100, y: 150, riddleNumber: 1 }, // Coordinates for Riddle 1
+    { x: 200, y: 250, riddleNumber: 2 }, // Coordinates for Riddle 2
+    { x: 300, y: 350, riddleNumber: 3 }  // Coordinates for Riddle 3
+];
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const bgMusic = document.getElementById('background-music');
@@ -37,6 +43,7 @@ document.addEventListener('keydown', function(event) {
 
     let left = character.offsetLeft;
     let top = character.offsetTop;
+    checkForRiddleTrigger();
 
     switch(event.key) {
         case 'ArrowUp': // Move North
@@ -53,6 +60,15 @@ document.addEventListener('keydown', function(event) {
             break;
     }
 });
+
+function showRiddle(number) {
+    const riddleId = 'riddle-container' + number; // e.g., 'riddle-container1'
+    const riddleContainer = document.getElementById(riddleId);
+    riddleContainer.style.display = 'block'; // or 'flex', 'grid', etc.
+}
+
+// Example usage: showRiddle(1); // This will show the first riddle container
+
 
 document.addEventListener('keydown', function(event) {
     const character = document.getElementById('character');
