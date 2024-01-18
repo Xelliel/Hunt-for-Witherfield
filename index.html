@@ -20,36 +20,38 @@
             <span class="heart">❤️</span>
         </div>
         <div id="riddle-container1">
-            <p id="riddle">"Are you lost, little soul?"</p>
-            <select id="riddle-answers">
+            <p class="riddle">"Are you lost, little soul?"</p>
+            <select id="riddle-answers1">
                 <option value="">--Select an answer--</option>
                 <option value="No, I'll find my own way">"No, I'll find my own way"</option>
                 <option value="Yes!! Please let me out of here!!">"Yes!! Please let me out of here!!"</option>
                 <option value="Who are you!? Where am I!?">"Who are you!? Where am I!?"</option>
             </select>
-            <button id="submit-answer">Submit Answer</button>
+            <button class="submit-answer" data-riddle-number="1">Submit Answer</button>
         </div>
         <div id="riddle-container2">
-            <p id="riddle">What is lost but seldom found?</p>
-            <select id="riddle-answers">
+            <p class="riddle">What is lost but seldom found?</p>
+            <select id="riddle-answers2">
                 <option value="">--Select an answer--</option>
                 <option value="Mercy.">"Mercy."</option>
                 <option value="I'll give you anything you want...">"I'll give you anything you want..."</option>
                 <option value="Sanity...?">"Sanity...?"</option>
             </select>
-            <button id="submit-answer">Submit Answer</button>
+            <button class="submit-answer" data-riddle-number="2">Submit Answer</button>
         </div>
         <div id="riddle-container3">
-            <p id="riddle">Will you join me in bleak eternity?</p>
-            <select id="riddle-answers">
+            <p class="riddle">Will you join me in bleak eternity?</p>
+            <select id="riddle-answers3">
                 <option value="">--Select an answer--</option>
-                <option value="Egg">"There isn't a way out, is there?"</option>
-                <option value="Window">"How long do you plan to keep up this game?"</option>
-                <option value="Bread">"If that's the only way..."</option>
+                <option value="There isn't a way out, is there?">"There isn't a way out, is there?"</option>
+                <option value="How long do you plan to keep up this game?">"How long do you plan to keep up this game?"</option>
+                <option value="If that's the only way...">"If that's the only way..."</option>
             </select>
-            <button id="submit-answer">Submit Answer</button>
+            <button class="submit-answer" data-riddle-number="3">Submit Answer</button>
         </div>
         <div id="game-over-screen" style="display:none;">
+            <img id="game-over-image" src="https://images.pexels.com/photos/534590/pexels-photo-534590.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="a photo of bones by Skitterphoto on pexels.com">
+           <button id="restart-button">Restart?</button>
             <p>You have been consumed by Witherfield...</p>
             <!-- Add more game-over information and maybe a restart button -->
         </div>

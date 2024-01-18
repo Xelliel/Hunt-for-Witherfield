@@ -1,20 +1,9 @@
-/* Things to make
-Character movement
+console.log("Script Loaded!");
 
-Events for riddles
-
-Events for getting riddles wrong
-
-Hearts to track life
-
-Game over screen
-
-Entraces to next area offorest */
 document.getElementById('start-game').addEventListener('click', function() {
     const bgMusic = document.getElementById('background-music');
     bgMusic.play();
 });
-
 
 document.getElementById('toggle-music').addEventListener('click', function() {
     const bgMusic = document.getElementById('background-music');
@@ -26,101 +15,126 @@ document.getElementById('toggle-music').addEventListener('click', function() {
 });
 
 const riddleTriggers = [
-    { x: 100, y: 150, riddleNumber: 1 }, // Coordinates for Riddle 1
-    { x: 200, y: 250, riddleNumber: 2 }, // Coordinates for Riddle 2
-    { x: 300, y: 350, riddleNumber: 3 }  // Coordinates for Riddle 3
+    { x: 100, y: 150, riddleNumber: 1 },
+    { x: 200, y: 250, riddleNumber: 2 },
+    { x: 300, y: 350, riddleNumber: 3 }
 ];
 
+document.addEventListener('DOMContentLoaded', initializeGame);
 
-document.addEventListener('DOMContentLoaded', function() {
+function initializeGame() {
     const bgMusic = document.getElementById('background-music');
     bgMusic.play();
-});
+    // Any other initialization code can go here
+}
 
-document.addEventListener('keydown', function(event) {
-    const step = 10; // How many pixels the character moves
+document.addEventListener('keydown', handleKeyDown);
+
+function handleKeyDown(event) {
+    const step = 10;
     const character = document.getElementById('character');
-
     let left = character.offsetLeft;
     let top = character.offsetTop;
-    checkForRiddleTrigger();
 
     switch(event.key) {
-        case 'ArrowUp': // Move North
+        case 'ArrowUp':
             character.style.top = Math.max(top - step, 0) + 'px';
             break;
-        case 'ArrowDown': // Move South
-            character.style.top = Math.min(top + step,480 ) + 'px';
+        case 'ArrowDown':
+            character.style.top = Math.min(top + step, 480) + 'px';
             break;
-        case 'ArrowLeft': // Move West
+        case 'ArrowLeft':
             character.style.left = Math.max(left - step, 0) + 'px';
             break;
-        case 'ArrowRight': // Move East
+        case 'ArrowRight':
             character.style.left = Math.min(left + step, 640) + 'px';
             break;
     }
-});
+
+    checkForRiddleTrigger();
+    checkForEntranceEvent();
+    toggleCharacterRunAnimation(event.key, true);
+}
+
+function checkForRiddleTrigger() {
+    const threshold = 10; // Define your threshold here
+    const character = document.getElementById('character');
+    const left = character.offsetLeft;
+    const top = character.offsetTop;
+
+    riddleTriggers.forEach(trigger => {
+        if (Math.abs(left - trigger.x) < threshold && Math.abs(top - trigger.y) < threshold) {
+            showRiddle(trigger.riddleNumber);
+        }
+    });
+}
 
 function showRiddle(number) {
-    const riddleId = 'riddle-container' + number; // e.g., 'riddle-container1'
+    const riddleId = 'riddle-container' + number;
     const riddleContainer = document.getElementById(riddleId);
-    riddleContainer.style.display = 'block'; // or 'flex', 'grid', etc.
+    riddleContainer.style.display = 'block';
 }
 
-// Example usage: showRiddle(1); // This will show the first riddle container
+document.addEventListener('keyup', handleKeyUp);
 
+function handleKeyUp(event) {
+    if (event.key.startsWith('Arrow')) {
+        toggleCharacterRunAnimation(event.key, false);
+    }
+}
 
-document.addEventListener('keydown', function(event) {
+function toggleCharacterRunAnimation(key, isRunning) {
     const character = document.getElementById('character');
-
-    if (event.key.startsWith('Arrow')) {
-        character.classList.add('character-run');
+    if (key.startsWith('Arrow')) {
+        if (isRunning) {
+            character.classList.add('character-run');
+        } else {
+            character.classList.remove('character-run');
+        }
     }
+}
+
+document.querySelectorAll('.submit-answer').forEach(button => {
+    button.addEventListener('click', function(event) {
+        const riddleNumber = this.dataset.riddleNumber; // Assuming each button has a data-riddle-number attribute
+        const selectedAnswer = document.getElementById('riddle-answers' + riddleNumber).value;
+        checkAnswer(selectedAnswer, riddleNumber);
+    });
 });
 
-document.addEventListener('keyup', function(event) {
-    if (event.key.startsWith('Arrow')) {
-        const character = document.getElementById('character');
-        character.classList.remove('character-run');
-    }
-});
-
-document.getElementById('submit-answer').addEventListener('click', function() {
-    const selectedAnswer = document.getElementById('riddle-answers').value;
-    checkAnswer(selectedAnswer);
-});
-
-function checkAnswer(answer) {
-    const correctAnswer = "No, I'll find my own way"; // You can change this based on the current riddle
-    if (answer !== correctAnswer) {
+function checkAnswer(answer, riddleNumber) {
+    // Update this function to handle different answers for different riddles
+    if (answer !== correctAnswers[riddleNumber]) {
         loseLife();
+        alert('You will feed the ravens...')
     } else {
         alert('And so you prolong the end...');
-        // You can add logic for correct answer, like moving to next riddle
+        // Logic for correct answer
     }
 }
+
+// Define your correct answers for each riddle here
+const correctAnswers = {
+    1: "No, I'll find my own way",
+    2: "Mercy.",
+    3: "If that's the only way..."
+};
 
 function checkForEntranceEvent() {
     const character = document.getElementById('character');
     const left = character.offsetLeft;
     const top = character.offsetTop;
-
-    // Example position for an entrance
-    const entrancePosition = { x: 300, y: 150 }; // Change as needed
+    const entrancePosition = { x: 300, y: 150 };
 
     if (left === entrancePosition.x && top === entrancePosition.y) {
         goToNextArea();
     }
 }
 
-function goToNextArea() {
-    // Logic to go to the next area
-    alert('You have entered the Forest of Shadows...');
-}
-
-// Call checkForEntranceEvent() in the keydown event listener
-
-
+//function goToNextArea() {
+   // alert('You have entered the Forest of Shadows...');
+    // Add logic to transition to the next area, no time for a next area, just work on functionality.
+//}
 
 let lives = 3;
 
@@ -136,21 +150,23 @@ function loseLife() {
 
 function updateLivesDisplay() {
     const hearts = document.querySelectorAll('.heart');
-    for (let i = 0; i < hearts.length; i++) {
-        if (i < lives) {
-            hearts[i].style.visibility = 'visible';
-        } else {
-            hearts[i].style.visibility = 'hidden';
-        }
-    }
+    hearts.forEach((heart, index) => {
+        heart.style.visibility = index < lives ? 'visible' : 'hidden';
+    });
 }
 
 function gameOver() {
     alert('You have been consumed by Witherfield...');
+    const gameOverScreen = document.getElementById('game-over-screen');
+    const restartButton = document.getElementById('restart-button');
+
+    // Display game over screen
+    gameOverScreen.style.display = 'block';
+
+    // Handle restart button click
+    restartButton.addEventListener('click', function() {
+        // Reload the page to restart the game
+        location.reload();
     // Add more game over logic here
+})
 }
-
-
-// Example of losing a life
-// Call loseLife() whenever the character loses a life
-// loseLife();
