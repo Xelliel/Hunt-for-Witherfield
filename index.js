@@ -65,6 +65,7 @@ function checkForRiddleTrigger() {
     riddleTriggers.forEach(trigger => {
         if (Math.abs(left - trigger.x) < threshold && Math.abs(top - trigger.y) < threshold) {
             showRiddle(trigger.riddleNumber);
+            resetRiddleTimer();
         }
     });
 }
@@ -102,6 +103,12 @@ document.querySelectorAll('.submit-answer').forEach(button => {
     });
 });
 
+function hideRiddle(number) {
+    const riddleId = 'riddle-container' + number;
+    const riddleContainer = document.getElementById(riddleId);
+    riddleContainer.style.display = 'none';
+}
+
 function checkAnswer(answer, riddleNumber) {
     // Update this function to handle different answers for different riddles
     if (answer !== correctAnswers[riddleNumber]) {
@@ -109,6 +116,8 @@ function checkAnswer(answer, riddleNumber) {
         alert('You will feed the ravens...')
     } else {
         alert('And so you prolong the end...');
+        resetRiddleTimer();
+        hideRiddle(riddleNumber);
         // Logic for correct answer
     }
 }
@@ -130,7 +139,39 @@ function checkForEntranceEvent() {
         goToNextArea();
     }
 }
+let riddleTimer;
 
+function startRiddleTimer() {
+
+    const riddleTimeout = 15000;
+
+    riddleTimer = setTimeout(() => {
+        showNextRiddle();
+    }, riddleTimeout);
+}
+
+function showNextRiddle() {
+
+    // Determine which riddle to show next
+    const nextRiddleNumber = findNextRiddleNumber();
+    showRiddle(nextRiddleNumber);
+}
+
+function findNextRiddleNumber() {
+    // Implement logic to determine the next riddle number
+    // This can be based on the last answered riddle or other game logic
+    // Example: return lastAnsweredRiddleNumber + 1;
+}
+
+function resetRiddleTimer() {
+    clearTimeout(riddleTimer);
+    startRiddleTimer();
+}
+
+// Call startRiddleTimer when the game starts or a riddle is answered
+startRiddleTimer();
+
+// Remember to call resetRiddleTimer() when the player finds or answers a riddle
 //function goToNextArea() {
    // alert('You have entered the Forest of Shadows...');
     // Add logic to transition to the next area, no time for a next area, just work on functionality.
@@ -155,8 +196,37 @@ function updateLivesDisplay() {
     });
 }
 
+let correctlyAnsweredRiddles = 0; // Tracks the number of correctly answered riddles
+
+function checkAnswer(answer, riddleNumber) {
+    if (answer !== correctAnswers[riddleNumber]) {
+        loseLife();
+        alert('Wrong answer...');
+    } else {
+        alert('Correct answer!');
+        correctlyAnsweredRiddles++;
+        if (correctlyAnsweredRiddles >= 3) {
+            gameWin();
+        } else {
+            resetRiddleTimer();
+            hideRiddle(riddleNumber);
+        }
+    }
+}
+
+function gameWin() {
+    clearTimeout(riddleTimer);
+    alert('Congratulations! You have won the game!');
+    document.getElementById('character').style.display = 'none';
+    const gameWinScreen = document.getElementById('game-win-screen');
+
+    // Display game win screen
+    gameWinScreen.style.display = 'block';
+}
 function gameOver() {
+    clearTimeout(riddleTimer);
     alert('You have been consumed by Witherfield...');
+    document.getElementById('character').style.display = 'none';
     const gameOverScreen = document.getElementById('game-over-screen');
     const restartButton = document.getElementById('restart-button');
 
