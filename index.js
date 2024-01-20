@@ -14,10 +14,12 @@ document.getElementById('toggle-music').addEventListener('click', function() {
     }
 });
 
+// Dont break this, it holds where the riddles reside on the map and if theyve been triggered or not.
+
 const riddleTriggers = [
-    { x: 100, y: 150, riddleNumber: 1 },
-    { x: 200, y: 250, riddleNumber: 2 },
-    { x: 300, y: 350, riddleNumber: 3 }
+    { x: 100, y: 150, riddleNumber: 1, triggered: false },
+    { x: 100, y: 200, riddleNumber: 2, triggered: false },
+    { x: 101, y: 230, riddleNumber: 3, triggered: false }
 ];
 
 document.addEventListener('DOMContentLoaded', initializeGame);
@@ -25,6 +27,7 @@ document.addEventListener('DOMContentLoaded', initializeGame);
 function initializeGame() {
     const bgMusic = document.getElementById('background-music');
     bgMusic.play();
+    startRiddleTimer();
     // Any other initialization code can go here
 }
 
@@ -56,6 +59,13 @@ function handleKeyDown(event) {
     toggleCharacterRunAnimation(event.key, true);
 }
 
+let audioElement;
+
+// Initialize the audio element
+document.addEventListener('DOMContentLoaded', () => {
+    audioElement = new Audio('assets/trigger sound.mp3');
+});
+
 function checkForRiddleTrigger() {
     const threshold = 10; // Define your threshold here
     const character = document.getElementById('character');
@@ -63,11 +73,23 @@ function checkForRiddleTrigger() {
     const top = character.offsetTop;
 
     riddleTriggers.forEach(trigger => {
-        if (Math.abs(left - trigger.x) < threshold && Math.abs(top - trigger.y) < threshold) {
+        if (!trigger.triggered && Math.abs(left - trigger.x) < threshold && Math.abs(top - trigger.y) < threshold) {
+            trigger.triggered = true; // Set the riddle as triggered
             showRiddle(trigger.riddleNumber);
             resetRiddleTimer();
+            playRiddleTriggerAudio();
         }
     });
+}
+
+
+
+function playRiddleTriggerAudio() {
+    // Check if the audio element is defined
+    if (audioElement) {
+        // Play the audio
+        audioElement.play();
+    }
 }
 
 function showRiddle(number) {
@@ -216,16 +238,20 @@ function checkAnswer(answer, riddleNumber) {
 
 function gameWin() {
     clearTimeout(riddleTimer);
-    alert('Congratulations! You have won the game!');
+    alert('Despite the sea of faceless whispers, and the pounding in your throbbing skull...you find a sense of relief as you approach a clearing in the shadows...');
     document.getElementById('character').style.display = 'none';
     const gameWinScreen = document.getElementById('game-win-screen');
-
-    // Display game win screen
     gameWinScreen.style.display = 'block';
+
+    // Handle win restart button click
+    document.getElementById('win-restart-button').addEventListener('click', function() {
+        location.reload(); // Reload the page to restart the game
+    });
 }
+
 function gameOver() {
     clearTimeout(riddleTimer);
-    alert('You have been consumed by Witherfield...');
+    alert('This world of your thrives in conflict. Sleep...and be born anew.');
     document.getElementById('character').style.display = 'none';
     const gameOverScreen = document.getElementById('game-over-screen');
     const restartButton = document.getElementById('restart-button');
