@@ -109,3 +109,23 @@ h1 {
     border-radius: 5px;
     cursor: pointer;
 }
+
+#game-win-screen {
+    /* Styles for the game win screen */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* Ensure it's above other elements */
+}
+
+#game-win-image {
+    /* Styles specifically for the game win image */
+    max-width: 80%;
+    max-height: 80%;
+}

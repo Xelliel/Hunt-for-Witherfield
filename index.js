@@ -201,9 +201,9 @@ let correctlyAnsweredRiddles = 0; // Tracks the number of correctly answered rid
 function checkAnswer(answer, riddleNumber) {
     if (answer !== correctAnswers[riddleNumber]) {
         loseLife();
-        alert('Wrong answer...');
+        alert('And so you shall feed the ravens...');
     } else {
-        alert('Correct answer!');
+        alert('And so you prolong the end...');
         correctlyAnsweredRiddles++;
         if (correctlyAnsweredRiddles >= 3) {
             gameWin();
