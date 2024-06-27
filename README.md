@@ -4,6 +4,8 @@ How to play: Using the arrow keys, navigate your way in the dark passages of Wit
 		You will be prompted by riddles when you've come near certain places on the map. Answer correctly and
 		you may find refuge; answer wrong and you may find yourself a nother lost soul within the woods.
 
+  This game is only functional with working arrow keys which control the direction of our hero.
+
   Win Condition: Answer 3 riddles correctly by finding them on the map
 
   Loss: Answer incorecctly 3 times.
